@@ -1,0 +1,21 @@
+Starting audit...
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:9:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:35:30: '19' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:50: Line is longer than 100 characters (found 102). [LineLength]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:52:38: Parameter testNumber should be final. [FinalParameters]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:54: Line is longer than 100 characters (found 138). [LineLength]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:56:9: '}' at column 9 should be on the same line as the next part of a multi-block statement (one that directly contains multiple blocks: if/else-if/else, do/while or try/catch/finally). [RightCurly]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:58: Line is longer than 100 characters (found 105). [LineLength]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:71:40: Parameter testNumber should be final. [FinalParameters]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:93:40: Parameter testNumber should be final. [FinalParameters]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:97:28: '>' is not followed by whitespace. [WhitespaceAround]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:97:48: '15' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:97:51: ')' is preceded with whitespace. [ParenPad]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:97:55: '3' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:97:59: '4' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\enums\Category.java:27:14: Parameter value should be final. [FinalParameters]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\enums\CityStrategyEnum.java:17:22: Parameter value should be final. [FinalParameters]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\enums\ElvesType.java:1: File does not end with a newline. [NewlineAtEndOfFile]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\enums\ElvesType.java:22:15: Parameter value should be final. [FinalParameters]
+Audit done.
+Checkstyle ends with 18 errors.
