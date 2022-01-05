@@ -13,9 +13,10 @@ Starting audit...
 [ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:97:51: ')' is preceded with whitespace. [ParenPad]
 [ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:97:55: '3' is a magic number. [MagicNumber]
 [ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\checker\Checker.java:97:59: '4' is a magic number. [MagicNumber]
+[ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\database\Gift.java:37:27: Parameter quantity should be final. [FinalParameters]
 [ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\enums\Category.java:27:14: Parameter value should be final. [FinalParameters]
 [ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\enums\CityStrategyEnum.java:17:22: Parameter value should be final. [FinalParameters]
 [ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\enums\ElvesType.java:1: File does not end with a newline. [NewlineAtEndOfFile]
 [ERROR] C:\Users\Cosmin\IdeaProjects\proiect2\.\src\enums\ElvesType.java:22:15: Parameter value should be final. [FinalParameters]
 Audit done.
-Checkstyle ends with 18 errors.
+Checkstyle ends with 19 errors.

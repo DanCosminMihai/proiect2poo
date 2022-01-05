@@ -53,14 +53,15 @@ public final class Database {
         children.add(new Child(kid.get("id").asInt(),
             kid.get("lastName").asText(), kid.get("firstName").asText(),
             kid.get("age").asInt(), kid.get("city").asText(),
-            kid.get("niceScore").asDouble(), prefs));
+            kid.get("niceScore").asDouble(), prefs, kid.get("niceScoreBonus").asDouble(),
+            kid.get("elf").asText()));
       }
 
       JsonNode gifts = jsonNode.get("initialData").get("santaGiftsList");
       santaGiftsList = new ArrayList<Gift>();
       for (JsonNode gift : gifts) {
         santaGiftsList.add(new Gift(gift.get("productName").asText(), gift.get("price").asDouble(),
-            gift.get("category").asText()));
+            gift.get("category").asText(), gift.get("quantity").asInt()));
       }
 
       annualChanges = new ArrayList<AnnualChange>();
@@ -70,7 +71,7 @@ public final class Database {
         ArrayList<Gift> ng = new ArrayList<Gift>();
         for (JsonNode gift : newGifts) {
           ng.add(new Gift(gift.get("productName").asText(), gift.get("price").asDouble(),
-              gift.get("category").asText()));
+              gift.get("category").asText(), gift.get("quantity").asInt()));
         }
         JsonNode newKids = change.get("newChildren");
         ArrayList<Child> nc = new ArrayList<Child>();
@@ -80,7 +81,8 @@ public final class Database {
           nc.add(new Child(kid.get("id").asInt(),
               kid.get("lastName").asText(), kid.get("firstName").asText(),
               kid.get("age").asInt(), kid.get("city").asText(),
-              kid.get("niceScore").asDouble(), prefs));
+              kid.get("niceScore").asDouble(), prefs, kid.get("niceScoreBonus").asDouble(),
+              kid.get("elf").asText()));
         }
 
         JsonNode kidUpdate = change.get("childrenUpdates");
@@ -89,9 +91,10 @@ public final class Database {
           ArrayList<String> prefs = new ArrayList<String>();
           update.get("giftsPreferences").forEach((e) -> prefs.add(e.asText()));
           cu.add(new ChildUpdate(update.get("id").asInt(),
-              update.get("niceScore").asText(), prefs));
+              update.get("niceScore").asText(), prefs, update.get("elf").asText()));
         }
-        annualChanges.add(new AnnualChange(change.get("newSantaBudget").asDouble(), ng, nc, cu));
+        annualChanges.add(new AnnualChange(change.get("newSantaBudget").asDouble(), ng, nc, cu,
+            change.get("strategy").asText()));
       }
     } catch (IOException e) {
       e.printStackTrace();

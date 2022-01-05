@@ -1,5 +1,6 @@
 package database;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 
 public final class Child {
@@ -14,10 +15,15 @@ public final class Child {
   private ArrayList<Double> niceScoreHistory;
   private Double assignedBudget;
   private ArrayList<Gift> receivedGifts;
+  @JsonIgnore
+  private Double niceScoreBonus;
+  @JsonIgnore
+  private String elf;
 
   public Child(final int id, final String lastName, final String firstName, final int age,
       final String city,
-      final Double niceScore, final ArrayList<String> giftsPreferences) {
+      final Double niceScore, final ArrayList<String> giftsPreferences, final Double niceScoreBonus,
+      final String elf) {
     this.id = id;
     this.lastName = lastName;
     this.firstName = firstName;
@@ -25,6 +31,8 @@ public final class Child {
     this.city = city;
     this.averageScore = niceScore;
     this.giftsPreferences = giftsPreferences;
+    this.niceScoreBonus = niceScoreBonus;
+    this.elf = elf;
   }
 
   public int getId() {
@@ -89,6 +97,10 @@ public final class Child {
 
   public void setReceivedGifts(final ArrayList<Gift> receivedGifts) {
     this.receivedGifts = receivedGifts;
+  }
+
+  public Double getNiceScoreBonus() {
+    return niceScoreBonus;
   }
 
 }
