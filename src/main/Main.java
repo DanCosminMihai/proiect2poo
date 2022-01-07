@@ -19,7 +19,7 @@ public final class Main {
      */
     public static void main(final String[] args) {
         //run the tests, one by one
-        for (int number = 1; number <= Constants.TESTS_NUMBER; number++) {
+        for (int number = 3; number <=3/* Constants.TESTS_NUMBER*/; number++) {
             Database database = new Database();
             String test = Integer.toString(number);
             database.readInput(test);

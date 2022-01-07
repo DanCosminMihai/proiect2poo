@@ -53,6 +53,10 @@ public final class Round {
             }
           }
           child.setGiftsPreferences(p);
+
+          if (!update.getElf().equals("null")) {
+            child.setElf(update.getElf());
+          }
         }
       });
       database.getChildren().sort((c1, c2) -> c1.getId() - c2.getId());
@@ -67,11 +71,11 @@ public final class Round {
       }
       StrategyFactory strategyFactory = new StrategyFactory(child);
       NiceScoreStrategy strategy = strategyFactory.getStrategy();
-      if (strategy == null) {
-        System.out.println(child);
-      }
       child.setAverageScore(strategy.getAverageNiceScore(child));
     });
+
+    database.getChildren()
+        .forEach((c) -> c.setAverageScore(c.getAverageScore() + c.getNiceScoreBonus()));
 
     //calculates the budget for each child
     Double sum = 0.0;
@@ -82,21 +86,35 @@ public final class Round {
     database.getChildren()
         .forEach((child) -> child.setAssignedBudget(child.getAverageScore() * budgetUnit));
 
+    database.getChildren().forEach((c) -> {
+      if (c.getElf().equals("black")) {
+        c.setAssignedBudget(c.getAssignedBudget() - c.getAssignedBudget() * 30 / 100);
+      }
+      if (c.getElf().equals("pink")) {
+        c.setAssignedBudget(c.getAssignedBudget() + c.getAssignedBudget() * 30 / 100);
+      }
+    });
+
     //assigns gifts to the children
+    System.out.println(roundNumber);
     for (Child child : database.getChildren()) {
       Double budget = child.getAssignedBudget();
       child.setReceivedGifts(new ArrayList<Gift>());
       for (String pref : child.getGiftsPreferences()) {
         ArrayList<Gift> giftArrayList = new ArrayList<>(database.getSantaGiftsList());
-        giftArrayList.removeIf((gift) -> !gift.getCategory().equals(pref));
+        giftArrayList.removeIf(
+            (gift) -> !gift.getCategory().equals(pref) || gift.getQuantity().equals(0));
         if (giftArrayList.size() != 0) {
           giftArrayList.sort((g1, g2) -> g1.getPrice().compareTo(g2.getPrice()));
+          System.out.println(
+              child.getLastName() + " " + child.getFirstName() + " " + giftArrayList);
           int i = 0;
           while (i < giftArrayList.size() && giftArrayList.get(i).getPrice() > budget) {
             i++;
           }
-          if (i < giftArrayList.size() && giftArrayList.get(i).getPrice() < budget) {
+          if (i < giftArrayList.size() && giftArrayList.get(i).getPrice() <= budget) {
             child.getReceivedGifts().add(giftArrayList.get(i));
+            giftArrayList.get(i).setQuantity(giftArrayList.get(i).getQuantity() - 1);
             budget -= giftArrayList.get(i).getPrice();
           }
         }

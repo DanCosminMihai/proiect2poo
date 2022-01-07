@@ -103,4 +103,11 @@ public final class Child {
     return niceScoreBonus;
   }
 
+  public String getElf() {
+    return elf;
+  }
+
+  public void setElf(final String elf) {
+    this.elf = elf;
+  }
 }
