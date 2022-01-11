@@ -4,8 +4,10 @@ import common.Constants;
 import database.Child;
 import database.Database;
 import database.Gift;
+import factory.GiftStrategyFactory;
 import factory.StrategyFactory;
 import java.util.ArrayList;
+import strategy.GiftStrategy;
 import strategy.NiceScoreStrategy;
 
 public final class Round {
@@ -18,6 +20,7 @@ public final class Round {
    */
   public void newRound(final int roundNumber, final Database database) {
     //update database according to annualChanges
+    String giftStrategy = "id";
     if (roundNumber > 0) {
       database.setSantaBudget(database.getAnnualChanges().get(roundNumber - 1).getNewSantaBudget());
       database.getChildren().forEach((child) -> child.setAge(child.getAge() + 1));
@@ -32,6 +35,7 @@ public final class Round {
       });
       database.getSantaGiftsList()
           .addAll(database.getAnnualChanges().get(roundNumber - 1).getNewGifts());
+      giftStrategy = database.getAnnualChanges().get(roundNumber - 1).getStrategy();
       database.getAnnualChanges().get(roundNumber - 1).getChildrenUpdates().forEach((update) -> {
         Child child = Database.getChildById(update.getId(), database);
         if (child != null) {
@@ -74,8 +78,13 @@ public final class Round {
       child.setAverageScore(strategy.getAverageNiceScore(child));
     });
 
+    //apply niceScore bonus
     database.getChildren()
-        .forEach((c) -> c.setAverageScore(c.getAverageScore() + c.getNiceScoreBonus()));
+        .forEach((c) -> {
+          Double score = c.getAverageScore();
+          score += score * c.getNiceScoreBonus() / Constants.ONEHUNDRED;
+          c.setAverageScore(Math.min(score, Constants.MAXSCORE));
+        });
 
     //calculates the budget for each child
     Double sum = 0.0;
@@ -86,39 +95,37 @@ public final class Round {
     database.getChildren()
         .forEach((child) -> child.setAssignedBudget(child.getAverageScore() * budgetUnit));
 
+    //apply black/pink elf modifications
     database.getChildren().forEach((c) -> {
       if (c.getElf().equals("black")) {
-        c.setAssignedBudget(c.getAssignedBudget() - c.getAssignedBudget() * 30 / 100);
+        c.setAssignedBudget(c.getAssignedBudget()
+            - c.getAssignedBudget() * Constants.ELFPERCENT / Constants.ONEHUNDRED);
       }
       if (c.getElf().equals("pink")) {
-        c.setAssignedBudget(c.getAssignedBudget() + c.getAssignedBudget() * 30 / 100);
+        c.setAssignedBudget(c.getAssignedBudget()
+            + c.getAssignedBudget() * Constants.ELFPERCENT / Constants.ONEHUNDRED);
       }
     });
 
     //assigns gifts to the children
-    System.out.println(roundNumber);
-    for (Child child : database.getChildren()) {
-      Double budget = child.getAssignedBudget();
-      child.setReceivedGifts(new ArrayList<Gift>());
-      for (String pref : child.getGiftsPreferences()) {
-        ArrayList<Gift> giftArrayList = new ArrayList<>(database.getSantaGiftsList());
-        giftArrayList.removeIf(
-            (gift) -> !gift.getCategory().equals(pref) || gift.getQuantity().equals(0));
-        if (giftArrayList.size() != 0) {
-          giftArrayList.sort((g1, g2) -> g1.getPrice().compareTo(g2.getPrice()));
-          System.out.println(
-              child.getLastName() + " " + child.getFirstName() + " " + giftArrayList);
-          int i = 0;
-          while (i < giftArrayList.size() && giftArrayList.get(i).getPrice() > budget) {
-            i++;
-          }
-          if (i < giftArrayList.size() && giftArrayList.get(i).getPrice() <= budget) {
-            child.getReceivedGifts().add(giftArrayList.get(i));
-            giftArrayList.get(i).setQuantity(giftArrayList.get(i).getQuantity() - 1);
-            budget -= giftArrayList.get(i).getPrice();
-          }
+    GiftStrategyFactory giftStrategyFactory = new GiftStrategyFactory(giftStrategy);
+    GiftStrategy assignGifts = giftStrategyFactory.getStrategy();
+    if (assignGifts != null) {
+      assignGifts.assignGifts(database);
+    }
+
+    //apply yellow elf modifications
+    database.getChildren().forEach((child) -> {
+      if (child.getElf().equals("yellow") && child.getReceivedGifts().size() == 0) {
+        ArrayList<Gift> gifts = new ArrayList<>(database.getSantaGiftsList());
+        gifts.removeIf((gift) -> !gift.getCategory().equals(child.getGiftsPreferences().get(0)));
+        gifts.sort((g1, g2) -> g1.getQuantity().compareTo(g2.getQuantity()));
+        Gift gift = gifts.get(0);
+        if (gift.getQuantity() > 0) {
+          child.getReceivedGifts().add(gift);
+          gift.setQuantity(gift.getQuantity() - 1);
         }
       }
-    }
+    });
   }
 }

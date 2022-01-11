@@ -4,28 +4,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum Category {
 
-    @JsonProperty("Board Games")
-    BOARD_GAMES("Board Games"),
+  @JsonProperty("Board Games")
+  BOARD_GAMES("Board Games"),
 
-    @JsonProperty("Books")
-    BOOKS("Books"),
+  @JsonProperty("Books")
+  BOOKS("Books"),
 
-    @JsonProperty("Clothes")
-    CLOTHES("Clothes"),
+  @JsonProperty("Clothes")
+  CLOTHES("Clothes"),
 
-    @JsonProperty("Sweets")
-    SWEETS("Sweets"),
+  @JsonProperty("Sweets")
+  SWEETS("Sweets"),
 
-    @JsonProperty("Technology")
-    TECHNOLOGY("Technology"),
+  @JsonProperty("Technology")
+  TECHNOLOGY("Technology"),
 
-    @JsonProperty("Toys")
-    TOYS("Toys");
+  @JsonProperty("Toys")
+  TOYS("Toys");
 
-    private String value;
+  private String value;
 
-    Category(String value) {
-        this.value = value;
-    }
+  Category(final String value) {
+    this.value = value;
+  }
 
 }

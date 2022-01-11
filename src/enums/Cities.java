@@ -4,39 +4,39 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum Cities {
 
-    @JsonProperty("Bucuresti")
-    BUCURESTI("Bucuresti"),
+  @JsonProperty("Bucuresti")
+  BUCURESTI("Bucuresti"),
 
-    @JsonProperty("Constanta")
-    CONSTANTA("Constanta"),
+  @JsonProperty("Constanta")
+  CONSTANTA("Constanta"),
 
-    @JsonProperty("Buzau")
-    BUZAU("Buzau"),
+  @JsonProperty("Buzau")
+  BUZAU("Buzau"),
 
-    @JsonProperty("Timisoara")
-    TIMISOARA("Timisoara"),
+  @JsonProperty("Timisoara")
+  TIMISOARA("Timisoara"),
 
-    @JsonProperty("Cluj-Napoca")
-    CLUJ("Cluj-Napoca"),
+  @JsonProperty("Cluj-Napoca")
+  CLUJ("Cluj-Napoca"),
 
-    @JsonProperty("Iasi")
-    IASI("Iasi"),
+  @JsonProperty("Iasi")
+  IASI("Iasi"),
 
-    @JsonProperty("Craiova")
-    CRAIOVA("Craiova"),
+  @JsonProperty("Craiova")
+  CRAIOVA("Craiova"),
 
-    @JsonProperty("Brasov")
-    BRASOV("Brasov"),
+  @JsonProperty("Brasov")
+  BRASOV("Brasov"),
 
-    @JsonProperty("Braila")
-    BRAILA("Braila"),
+  @JsonProperty("Braila")
+  BRAILA("Braila"),
 
-    @JsonProperty("Oradea")
-    ORADEA("Oradea");
+  @JsonProperty("Oradea")
+  ORADEA("Oradea");
 
-    private String value;
+  private String value;
 
-    Cities(final String value) {
-        this.value = value;
-    }
+  Cities(final String value) {
+    this.value = value;
+  }
 }

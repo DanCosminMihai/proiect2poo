@@ -34,17 +34,8 @@ public final class Gift {
     return quantity;
   }
 
-  public void setQuantity(Integer quantity) {
+  public void setQuantity(final Integer quantity) {
     this.quantity = quantity;
   }
 
-  @Override
-  public String toString() {
-    return "Gift{" +
-        "productName='" + productName + '\'' +
-        ", price=" + price +
-        ", category='" + category + '\'' +
-        ", quantity=" + quantity +
-        '}';
-  }
 }

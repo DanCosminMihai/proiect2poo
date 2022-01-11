@@ -16,7 +16,10 @@ public final class Constants {
   public static final Integer FIVE = 5;
   public static final Integer TWELVE = 12;
   public static final Integer EIGHTEEN = 18;
-  public static final Double BABYSCORE = 10.0;
+  public static final Double MAXSCORE = 10.0;
+  public static final Integer ONEHUNDRED = 100;
+  public static final Integer ELFPERCENT = 30;
+
 
   private Constants() {
     //constructor for checkstyle

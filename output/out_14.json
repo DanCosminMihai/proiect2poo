@@ -66,8 +66,8 @@
       "niceScoreHistory" : [ 7.0, 1.0 ],
       "assignedBudget" : 94.94999999999999,
       "receivedGifts" : [ {
-        "productName" : "Teddy Bear",
-        "price" : 5.0,
+        "productName" : "Doll",
+        "price" : 10.0,
         "category" : "Toys"
       }, {
         "productName" : "Dress",
@@ -85,8 +85,8 @@
       "niceScoreHistory" : [ 7.0 ],
       "assignedBudget" : 221.54999999999998,
       "receivedGifts" : [ {
-        "productName" : "Doll",
-        "price" : 10.0,
+        "productName" : "Teddy Bear",
+        "price" : 5.0,
         "category" : "Toys"
       }, {
         "productName" : "Harry Potter",
@@ -190,11 +190,7 @@
       "averageScore" : 4.333333333333333,
       "niceScoreHistory" : [ 7.0, 3.0 ],
       "assignedBudget" : 147.0625,
-      "receivedGifts" : [ {
-        "productName" : "Harry Potter",
-        "price" : 35.0,
-        "category" : "Books"
-      } ]
+      "receivedGifts" : [ ]
     }, {
       "id" : 3,
       "lastName" : "Cantemir",
@@ -205,7 +201,11 @@
       "averageScore" : 9.0,
       "niceScoreHistory" : [ 9.0 ],
       "assignedBudget" : 305.4375,
-      "receivedGifts" : [ ]
+      "receivedGifts" : [ {
+        "productName" : "Harry Potter",
+        "price" : 35.0,
+        "category" : "Books"
+      } ]
     } ]
   } ]
 }

@@ -7,6 +7,6 @@ public final class BabyStrategy implements NiceScoreStrategy {
 
   @Override
   public Double getAverageNiceScore(final Child child) {
-    return Constants.BABYSCORE;
+    return Constants.MAXSCORE;
   }
 }
