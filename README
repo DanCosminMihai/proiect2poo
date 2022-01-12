@@ -1,0 +1,14 @@
+Dan Cosmin-Mihai, 322CA
+
+Pentru implementarea celei de-a doua etape a proiectului, am plecat de la codul
+scris in prima etapa. Flow-ul programului a ramas acelasi, fiind adaugate doar 
+noile functionalitati:
+-la actualizarea datelor anuale, sunt actualizati elfii
+-dupa calcularea scorului pentru fiecare copil, se aplica bonusurile si
+modificarile elfilor black si pink
+-partea de distribuire a cadourilor este realizata separat (prin intermediul
+design pattern-urilor Strategy sI Factory), in cadrul unor strategii
+(IdStrategy, NiceScoreGiftStrategy, NiceScoreCityStrategy), fiecare dintre
+acestea fiind aleasa de GiftStrategyFactory, in functie de ces este cerut
+pentru runda respectiva
+-la final, se aplica modificarile aduse de elful Yellow
